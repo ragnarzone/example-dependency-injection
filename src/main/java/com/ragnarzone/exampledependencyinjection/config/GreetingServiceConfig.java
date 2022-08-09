@@ -1,13 +1,25 @@
 package com.ragnarzone.exampledependencyinjection.config;
 
+import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRepository;
+import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRepositoryImpl;
 import com.ragnarzone.exampledependencyinjection.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import com.springframework.pets.CatPetService;
+import com.springframework.pets.DogPetService;
+import org.springframework.context.annotation.*;
 
+@ComponentScan(basePackages = {"com.springframework.pets"})
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean("dogPetService")
+    DogPetService dogPetService() {
+        return new DogPetService();
+    }
+
+    @Bean("catPetService")
+    CatPetService catPetService() {
+        return new CatPetService();
+    }
 
     @Profile({"ES", "default"})
     @Bean("i18nService")
@@ -15,10 +27,15 @@ public class GreetingServiceConfig {
         return new I18nSpanishGreetingService();
     }
 
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository() {
+        return new EnglishGreetingRepositoryImpl();
+    }
+
     @Profile("EN")
     @Bean
-    I18nEnglishGreetingService i18nService() {
-        return new I18nEnglishGreetingService();
+    I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository) {
+        return new I18nEnglishGreetingService(englishGreetingRepository);
     }
 
     @Primary

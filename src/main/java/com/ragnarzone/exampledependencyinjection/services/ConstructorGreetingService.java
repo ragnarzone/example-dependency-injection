@@ -1,6 +1,6 @@
 package com.ragnarzone.exampledependencyinjection.services;
 
-import org.springframework.stereotype.Service;
+
 
 public class ConstructorGreetingService implements GreetingService {
     @Override
