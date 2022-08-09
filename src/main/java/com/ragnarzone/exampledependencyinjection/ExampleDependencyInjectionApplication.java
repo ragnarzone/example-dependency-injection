@@ -1,6 +1,8 @@
 package com.ragnarzone.exampledependencyinjection;
 
 import com.ragnarzone.exampledependencyinjection.controllers.*;
+import com.ragnarzone.exampledependencyinjection.services.PrototypeBean;
+import com.ragnarzone.exampledependencyinjection.services.SingletonBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -39,6 +41,17 @@ public class ExampleDependencyInjectionApplication {
 
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
+
+		System.out.println("------ Bean Scopes --------");
+		SingletonBean singletonBean1 = ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean1.getMyScrope());
+		SingletonBean singletonBean2 = ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.getMyScrope());
+
+		PrototypeBean prototypeBean1 = ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean1.getMyScope());
+		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.getMyScope());
 	}
 
 }
