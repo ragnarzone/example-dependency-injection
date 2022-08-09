@@ -3,22 +3,32 @@ package com.ragnarzone.exampledependencyinjection.config;
 import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRepository;
 import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRepositoryImpl;
 import com.ragnarzone.exampledependencyinjection.services.*;
-import com.springframework.pets.CatPetService;
-import com.springframework.pets.DogPetService;
-import org.springframework.context.annotation.*;
+import com.springframework.pets.PetService;
+import com.springframework.pets.PetServiceFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
-@ComponentScan(basePackages = {"com.springframework.pets"})
+
 @Configuration
 public class GreetingServiceConfig {
 
-    @Bean("dogPetService")
-    DogPetService dogPetService() {
-        return new DogPetService();
+    @Bean
+    PetServiceFactory petServiceFactory() {
+        return new PetServiceFactory();
     }
 
-    @Bean("catPetService")
-    CatPetService catPetService() {
-        return new CatPetService();
+    @Profile({"dog", "default"})
+    @Bean("petService")
+    PetService dogPetService(PetServiceFactory petServiceFactory) {
+        return petServiceFactory.getPetService("dog");
+    }
+
+    @Profile("cat")
+    @Bean("petService")
+    PetService catPetService(PetServiceFactory petServiceFactory) {
+        return petServiceFactory.getPetService("cat");
     }
 
     @Profile({"ES", "default"})
