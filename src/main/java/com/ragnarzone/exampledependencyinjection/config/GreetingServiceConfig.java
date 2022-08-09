@@ -5,12 +5,10 @@ import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRep
 import com.ragnarzone.exampledependencyinjection.services.*;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 
+@ImportResource("classpath:di-config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
@@ -54,7 +52,7 @@ public class GreetingServiceConfig {
         return new PrimaryGreetingService();
     }
 
-    @Bean
+//    @Bean
     ConstructorGreetingService constructorGreetingService() {
         return new ConstructorGreetingService();
     }
