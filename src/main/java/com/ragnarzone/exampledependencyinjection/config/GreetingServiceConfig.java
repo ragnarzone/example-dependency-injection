@@ -6,7 +6,6 @@ import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRep
 import com.ragnarzone.exampledependencyinjection.services.*;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
 
@@ -15,13 +14,11 @@ import org.springframework.context.annotation.*;
 public class GreetingServiceConfig {
 
     @Bean
-    FakeDataSource fakeDataSource(@Value("${ragnarzone.username}") String username,
-                                  @Value("${ragnarzone.password}") String password,
-                                  @Value("${ragnarzone.jdbcurl}") String jdbcurl){
+    FakeDataSource fakeDataSource(RagnarzoneConfiguration ragnarzoneConfiguration){
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUsername(username);
-        fakeDataSource.setPassword(password);
-        fakeDataSource.setJdbcurl(jdbcurl);
+        fakeDataSource.setUsername(ragnarzoneConfiguration.getUsername());
+        fakeDataSource.setPassword(ragnarzoneConfiguration.getPassword());
+        fakeDataSource.setJdbcurl(ragnarzoneConfiguration.getJdbcurl());
 
         return fakeDataSource;
     }

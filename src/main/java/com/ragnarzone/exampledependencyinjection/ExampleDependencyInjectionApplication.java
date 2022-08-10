@@ -1,5 +1,6 @@
 package com.ragnarzone.exampledependencyinjection;
 
+import com.ragnarzone.exampledependencyinjection.config.RagnarzoneConfiguration;
 import com.ragnarzone.exampledependencyinjection.controllers.*;
 import com.ragnarzone.exampledependencyinjection.datasource.FakeDataSource;
 import com.ragnarzone.exampledependencyinjection.services.PrototypeBean;
@@ -54,10 +55,17 @@ public class ExampleDependencyInjectionApplication {
 		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getMyScope());
 
+		System.out.println("---------- Fake Data Source:");
 		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
 		System.out.println(fakeDataSource.getUsername());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getJdbcurl());
+
+		System.out.println("--------- Config Props Bean");
+		RagnarzoneConfiguration ragnarzoneConfiguration = ctx.getBean(RagnarzoneConfiguration.class);
+		System.out.println(ragnarzoneConfiguration.getUsername());
+		System.out.println(ragnarzoneConfiguration.getPassword());
+		System.out.println(ragnarzoneConfiguration.getJdbcurl());
 	}
 
 }
