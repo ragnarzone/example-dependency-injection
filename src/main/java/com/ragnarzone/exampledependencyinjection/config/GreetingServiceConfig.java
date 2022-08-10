@@ -6,9 +6,11 @@ import com.ragnarzone.exampledependencyinjection.repositories.EnglishGreetingRep
 import com.ragnarzone.exampledependencyinjection.services.*;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
 
+@EnableConfigurationProperties(RagnarzoneConstructorConfig.class)
 @ImportResource("classpath:di-config.xml")
 @Configuration
 public class GreetingServiceConfig {

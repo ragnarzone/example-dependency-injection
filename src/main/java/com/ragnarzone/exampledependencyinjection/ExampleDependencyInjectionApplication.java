@@ -1,6 +1,7 @@
 package com.ragnarzone.exampledependencyinjection;
 
 import com.ragnarzone.exampledependencyinjection.config.RagnarzoneConfiguration;
+import com.ragnarzone.exampledependencyinjection.config.RagnarzoneConstructorConfig;
 import com.ragnarzone.exampledependencyinjection.controllers.*;
 import com.ragnarzone.exampledependencyinjection.datasource.FakeDataSource;
 import com.ragnarzone.exampledependencyinjection.services.PrototypeBean;
@@ -65,6 +66,12 @@ public class ExampleDependencyInjectionApplication {
 		RagnarzoneConfiguration ragnarzoneConfiguration = ctx.getBean(RagnarzoneConfiguration.class);
 		System.out.println(ragnarzoneConfiguration.getUsername());
 		System.out.println(ragnarzoneConfiguration.getPassword());
+		System.out.println(ragnarzoneConfiguration.getJdbcurl());
+
+		System.out.println("----------- Constructor Binding");
+		RagnarzoneConstructorConfig ragnarzoneConstructorConfig = ctx.getBean(RagnarzoneConstructorConfig.class);
+		System.out.println(ragnarzoneConstructorConfig.getUsername());
+		System.out.println(ragnarzoneConstructorConfig.getPassword());
 		System.out.println(ragnarzoneConfiguration.getJdbcurl());
 	}
 
