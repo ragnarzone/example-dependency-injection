@@ -1,6 +1,7 @@
 package com.ragnarzone.exampledependencyinjection;
 
 import com.ragnarzone.exampledependencyinjection.controllers.*;
+import com.ragnarzone.exampledependencyinjection.datasource.FakeDataSource;
 import com.ragnarzone.exampledependencyinjection.services.PrototypeBean;
 import com.ragnarzone.exampledependencyinjection.services.SingletonBean;
 import org.springframework.boot.SpringApplication;
@@ -52,6 +53,11 @@ public class ExampleDependencyInjectionApplication {
 		System.out.println(prototypeBean1.getMyScope());
 		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getMyScope());
+
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUsername());
+		System.out.println(fakeDataSource.getPassword());
+		System.out.println(fakeDataSource.getJdbcurl());
 	}
 
 }
